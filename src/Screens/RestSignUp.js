@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { restSignUp } from '../Store/Action/authAction'
 
 
 
-class SignUp extends Component {
+
+class RestSignUp extends Component {
     state = {
         RestaurantName: "",
         OwnerName: "",
@@ -23,11 +25,13 @@ class SignUp extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
+        this.props.restSignUp(this.state)
+
         console.log('state ===>', this.state)
     }
     render() {
-        const { auth } = this.props;
-        // if(auth.uid) return <Redirect to='/' />
+        const { auth, authError } = this.props;
+        if(auth.uid) return <Redirect to='/signin ' />
 
         return (
             <div className="container">
@@ -70,11 +74,17 @@ class SignUp extends Component {
     }
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//         auth: state.firebase.auth
-//     }
-// }
 
-export default SignUp;
-// connect(mapStateToProps)
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+        authError: state.auth.authError
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        restSignUp: (restUser) => dispatch(restSignUp(restUser))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(RestSignUp);

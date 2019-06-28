@@ -48,3 +48,29 @@ export const signUp = (newUser)=> {
         })
     }
 }
+
+export const restSignUp = (restUser)=> {
+    return (dispatch, getState, { getFirebase, getFirestore}) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+
+        firebase.auth().createUserWithEmailAndPassword(
+            restUser.email,
+            restUser.password
+            ).then((resp)=> {
+            return firestore.collection('restUsers').doc(resp.user.uid).set({
+                fullName: restUser.fullName,
+                // email: newUser.email,
+                // gender:newUser.gender,
+                // age: newUser.age,
+                // country: newUser.age,
+                // city: newUser.city,
+                initials: restUser.fullName[0]
+            })
+        }).then(()=> {
+            dispatch({ type: 'REST_SIGNUP_SUCCESSFULLY' })
+        }).catch(err => {
+            dispatch({ type: 'REST_SIGNUP_ERROR', err})
+        })
+    }
+}
