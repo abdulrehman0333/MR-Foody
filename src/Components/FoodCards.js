@@ -15,7 +15,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Snack from '../Assets/Images/snack.jpg'
+import Snack from '../Assets/Images/bg4.jpg'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -66,9 +66,6 @@ export default function RecipeReviewCard() {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="Add to favorites">
-          <FavoriteIcon />
-        </IconButton>
       </CardActions>
     </Card>
   );

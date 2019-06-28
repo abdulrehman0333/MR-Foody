@@ -1,13 +1,12 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import SignUp from './Screens/SignUp';
 import SignIn from './Screens/SignIn';
+import RestSignUp from "./Screens/RestSignUp";
 import Header from './Screens/Header';
-import Tag from './Components/Tags';
-import Grid  from './Components/Grids';
-import Footer from './Screens/Footer'
-import Chips from './Components/CountryChips';
-import Navigations from "./config/router";
+import Dashboard from './Screens/Dashboard';
+import { signIn } from './Store/Action/authAction';
 
 class App extends React.Component {
   constructor() {
@@ -19,26 +18,19 @@ class App extends React.Component {
   }
   render() { 
   return (
-    <div className='Header'>
-      <Header /> 
-      <div className="app_bg" style={{width:"100%", height:"545px" }}>
-      <Tag />
-      </div> 
-      <div className="App" >
-        <div className="cards" style={{marginTop:"0.8in"}}>
-          <Grid />
-        </div>
-        <div className="countryChips">
-          <Chips />
-        </div>
-          
-          {/* <SignUp />
-          <SignIn /> */}
-      </div>
-      <div>
-        <Footer />
-      </div>
+    <BrowserRouter>
+    <div className="App">
+      <Header />
+      <Switch>
+        <Route exact path="/" component={SignIn} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/restsignup" component={RestSignUp} />
+      </Switch>
     </div>
+    </BrowserRouter>
+
   );
   }
 }

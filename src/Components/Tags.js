@@ -16,7 +16,7 @@ export default class Tag extends React.Component {
             <h1 data-aos='fade-up' style = {
                 {
                     paddingTop: "1.3in",
-                    paddingLeft:"1.8in",
+                    paddingLeft:"0",
                     color: "snow",
                     fontFamily: "sanserif",
                     fontSize: "50px"
